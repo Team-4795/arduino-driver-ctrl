@@ -1,0 +1,31 @@
+
+Unfortunately, some of the code we need is already in the supplied
+arduino libraries in an incomplete form.   So, we need to modify it.
+
+Two files need to be substituted into your arduino libraries:
+   
+    USBAPI.h
+    HID.cpp
+
+The versions in this directory are based on arduino-1.0.5.  If using
+that version, rename the originals and then make symbolic links (shortcuts) to 
+the files in this directory.
+
+On Fedora linux, I did:
+
+     sudo yum install arduino-1.0.5
+
+     here=`/bin/pwd`
+
+     cd /usr/share/arduino/hardware/arduino/cores/arduino
+     sudo mv USBAPI.h USBAPI.h.orig
+     sudo mv HID.cpp HID.cpp.orig
+
+     ln -s $here/USBAPI.h .
+     ln -s $here/HID.cpp .
+
+     cd $here
+
+
+TODO:
+more general instructions

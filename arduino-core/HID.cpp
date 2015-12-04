@@ -131,20 +131,13 @@ const u8 _hidReportDescriptor[] = {
     0x85, 0x03,                    //     REPORT_ID (3)  -- arg to HID_SendReport
     0x05, 0x09,                    //     USAGE_PAGE (Button)
     0x19, 0x01,                    //     USAGE_MINIMUM (Button 1)
-    0x29, 0x08,                    //     USAGE_MAXIMUM (Button 8)
+    0x29, 0x10,                    //     USAGE_MAXIMUM (Button 16)
     0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
     0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
-    0x95, 0x04,                    //     REPORT_COUNT (4)
+    0x95, 0x10,                    //     REPORT_COUNT (16)
     0x75, 0x01,                    //     REPORT_SIZE (1)
     0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0x05, 0x01,                    //     USAGE_PAGE (Generic Desktop)
-    0x09, 0x30,                    //     USAGE (X)
-    0x09, 0x31,                    //     USAGE (Y)
-    0x15, 0xff,                    //     LOGICAL_MINIMUM (-1)
-    0x25, 0x01,                    //     LOGICAL_MAXIMUM (1)
-    0x95, 0x02,                    //     REPORT_COUNT (2)
-    0x75, 0x02,                    //     REPORT_SIZE (2)
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
+
     0xc0,                          //   END_COLLECTION
     0xc0                           // END_COLLECTION
 
@@ -572,8 +565,9 @@ size_t Keyboard_::write(uint8_t c)
 // Gamepad
 #ifdef HID_JOYSTICK
 
-Gamepad_::Gamepad_(void) : _buttons(0)
+Gamepad_::Gamepad_(void)
 {
+	report.buttons[0] = 0;
 }
 
 void Gamepad_::begin(void)
@@ -584,23 +578,11 @@ void Gamepad_::end(void)
 {
 }
 
-void Gamepad_::press(uint8_t b)
+void Gamepad_::move(uint16_t bs)
 {
-	_buttons |= b;
-	HID_SendReport(3,&_buttons,1);
-}
-
-void Gamepad_::release(uint8_t b)
-{
-	_buttons &= ~b;
-	HID_SendReport(3,&_buttons,1);
-}
-
-bool Gamepad_::isPressed(uint8_t b)
-{
-	if ((b & _buttons) > 0) 
-		return true;
-	return false;
+	report.buttons[0] = bs & 0xff;
+	report.buttons[1] = bs >> 8;
+	HID_SendReport(3, &report, 2);
 }
 
 #endif

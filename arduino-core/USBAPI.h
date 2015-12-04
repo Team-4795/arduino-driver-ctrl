@@ -200,21 +200,26 @@ void USB_Flush(uint8_t ep);
 
 #ifdef HID_JOYSTICK
 
+typedef struct {
+	uint8_t buttons[2];
+} GamepadReport;
+
 class Gamepad_
 {
 private:
-	uint8_t _buttons;
+	GamepadReport report;
 public:
 	Gamepad_(void);
 	void begin(void);
 	void end(void);
-	void press(uint8_t b);
-	void release(uint8_t b);
-	bool isPressed(uint8_t b);
+	void move(uint16_t b);
+//	void press(uint8_t b);
+//	void release(uint8_t b);
+//	bool isPressed(uint8_t b);
 };
 extern Gamepad_ Gamepad;
 
-#endif
+#endif  // HID_JOYSTICK
 
 #endif
 

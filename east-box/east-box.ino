@@ -15,12 +15,14 @@ void setup() {
 
 }
 
-static   uint8_t prev_btns;
+static   uint16_t prev_btns;
 
 void loop() {
-	uint8_t btns;
+	uint16_t btns;
   
 	btns = 0;
+	btns |= 0x8000;  // test hack: button 15 always pressed.
+
 	if(digitalRead(8) == 0)
 		btns |= 1;
 	if(digitalRead(10) == 0)
@@ -30,32 +32,9 @@ void loop() {
 	if(digitalRead(12) == 0)
 		btns |= 8;
 
-	if((btns&1) != (prev_btns&1)) {
-		if(btns&1)  {
-			Gamepad.press(1);
-//			digitalWrite(13, HIGH);
-		} else {
-			Gamepad.release(1);
-//			digitalWrite(13, LOW);
-		}
+	if(btns != prev_btns) {
+		Gamepad.move(btns);
 	}
-	if((btns&2) != (prev_btns&2)) {
-		if(btns&2) 
-			Gamepad.press(2);
-		else
-			Gamepad.release(2);
-	}
-	if((btns&4) != (prev_btns&4)) {
-		if(btns&4) 
-			Gamepad.press(4);
-		else
-			Gamepad.release(4);
-	}
-	if((btns&8) != (prev_btns&8)) {
-		if(btns&8) 
-			Gamepad.press(8);
-		else
-			Gamepad.release(8);
-	}
+
 	prev_btns = btns;
 }
