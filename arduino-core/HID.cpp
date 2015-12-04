@@ -27,8 +27,13 @@
 
 //	Singletons for mouse and keyboard
 
+#ifdef HID_MOUSE
 Mouse_ Mouse;
+#endif
+
+#ifdef HID_KEYBOARD
 Keyboard_ Keyboard;
+#endif
 
 #ifdef HID_JOYSTICK
 Gamepad_ Gamepad;
@@ -53,6 +58,8 @@ const u8 _hidReportDescriptor[] = {
 	
 	//	Mouse
     0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)	// 54
+
+#ifdef HID_MOUSE
     0x09, 0x02,                    // USAGE (Mouse)
     0xa1, 0x01,                    // COLLECTION (Application)
     0x09, 0x01,                    //   USAGE (Pointer)
@@ -80,6 +87,8 @@ const u8 _hidReportDescriptor[] = {
     0x81, 0x06,                    //     INPUT (Data,Var,Rel)
     0xc0,                          //   END_COLLECTION
     0xc0,                          // END_COLLECTION
+#endif // HID_MOUSE
+#ifdef HID_KEYBOARD
 
 	//	Keyboard
     0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)	// 47
@@ -110,6 +119,7 @@ const u8 _hidReportDescriptor[] = {
     0x29, 0x65,                    //   USAGE_MAXIMUM (Keyboard Application)
     0x81, 0x00,                    //   INPUT (Data,Ary,Abs)
     0xc0,                          // END_COLLECTION
+#endif HID_KEYBOARD
 
 #ifdef HID_JOYSTICK
 
@@ -231,10 +241,12 @@ bool WEAK HID_Setup(Setup& setup)
 	return false;
 }
 
+
 //================================================================================
 //================================================================================
 //	Mouse
-
+#ifdef HID_MOUSE
+ 
 Mouse_::Mouse_(void) : _buttons(0)
 {
 }
@@ -291,9 +303,13 @@ bool Mouse_::isPressed(uint8_t b)
 	return false;
 }
 
+#endif  // HID_MOUSE
+
 //================================================================================
 //================================================================================
 //	Keyboard
+
+#ifdef HID_KEYBOARD
 
 Keyboard_::Keyboard_(void) 
 {
@@ -549,11 +565,12 @@ size_t Keyboard_::write(uint8_t c)
 	return (p);					// just return the result of press() since release() almost always returns 1
 }
 
+#endif // HID_KEYBOARD
 
-#ifdef HID_JOYSTICK
 
 //================================================================================
 // Gamepad
+#ifdef HID_JOYSTICK
 
 Gamepad_::Gamepad_(void) : _buttons(0)
 {

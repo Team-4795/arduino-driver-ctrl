@@ -48,6 +48,8 @@ extern Serial_ Serial;
 //================================================================================
 //	Mouse
 
+#ifdef HID_MOUSE 
+
 #define MOUSE_LEFT 1
 #define MOUSE_RIGHT 2
 #define MOUSE_MIDDLE 4
@@ -69,10 +71,12 @@ public:
 	bool isPressed(uint8_t b = MOUSE_LEFT);	// check LEFT by default
 };
 extern Mouse_ Mouse;
+#endif
 
 //================================================================================
 //================================================================================
 //	Keyboard
+#ifdef HID_KEYBOARD
 
 #define KEY_LEFT_CTRL		0x80
 #define KEY_LEFT_SHIFT		0x81
@@ -134,6 +138,8 @@ public:
 	virtual void releaseAll(void);
 };
 extern Keyboard_ Keyboard;
+
+#endif // HID_KEYBOARD
 
 //================================================================================
 //================================================================================
