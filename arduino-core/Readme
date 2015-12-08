@@ -1,6 +1,10 @@
 
-Unfortunately, some of the code we need is already in the supplied
+For older versions of the Arduino SDK (software development kit)
+some of the code we need is already in the supplied
 arduino libraries in an incomplete form.   So, we need to modify it.
+This code here works for arduino-1.0.5.
+Ignore this directory if using the latest arduino-1.6.6
+
 
 Two files need to be substituted into your arduino libraries:
    
@@ -26,6 +30,7 @@ On Fedora linux, I did:
 
      cd $here
 
-
 TODO:
-more general instructions
+	more general instructions, 
+	instructions for other platforms
+

@@ -141,6 +141,31 @@ extern Keyboard_ Keyboard;
 
 #endif // HID_KEYBOARD
 
+
+//================================================================================
+//================================================================================
+// Joystick/Gamepad
+#ifdef HID_JOYSTICK
+
+typedef struct {
+	uint8_t buttons[2];
+} GamepadReport;
+
+class Gamepad_
+{
+private:
+	GamepadReport report;
+public:
+	Gamepad_(void);
+	void begin(void);
+	void end(void);
+	void move(uint16_t b);
+};
+extern Gamepad_ Gamepad;
+
+#endif  // HID_JOYSTICK
+
+
 //================================================================================
 //================================================================================
 //	Low level API
@@ -196,30 +221,6 @@ int USB_Send(uint8_t ep, const void* data, int len);	// blocking
 int USB_Recv(uint8_t ep, void* data, int len);		// non-blocking
 int USB_Recv(uint8_t ep);							// non-blocking
 void USB_Flush(uint8_t ep);
-
-
-#ifdef HID_JOYSTICK
-
-typedef struct {
-	uint8_t buttons[2];
-} GamepadReport;
-
-class Gamepad_
-{
-private:
-	GamepadReport report;
-public:
-	Gamepad_(void);
-	void begin(void);
-	void end(void);
-	void move(uint16_t b);
-//	void press(uint8_t b);
-//	void release(uint8_t b);
-//	bool isPressed(uint8_t b);
-};
-extern Gamepad_ Gamepad;
-
-#endif  // HID_JOYSTICK
 
 #endif
 

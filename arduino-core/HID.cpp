@@ -137,7 +137,6 @@ const u8 _hidReportDescriptor[] = {
     0x95, 0x10,                    //     REPORT_COUNT (16)
     0x75, 0x01,                    //     REPORT_SIZE (1)
     0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-
     0xc0,                          //   END_COLLECTION
     0xc0                           // END_COLLECTION
 

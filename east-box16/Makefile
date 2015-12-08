@@ -2,7 +2,7 @@
 # per-project makefile for use with the Arduino-Makefile package
 # from https://github.com/sudar/Arduino-Makefile
 #
-ARDMK_DIR=../../arduino/arduino-makefile-git/Arduino-Makefile
+ARDMK_DIR=../../Arduino-Makefile
 
 # Choose your arduino board type here.
 BOARD_TAG    = micro
@@ -22,4 +22,3 @@ CFLAGS += -DCDC_ENABLED -DHID_JOYSTICK
 CXXFLAGS += -DCDC_ENABLED -DHID_JOYSTICK -std=c++11 -fno-exceptions
 
 include $(ARDMK_DIR)/Arduino.mk
-
