@@ -1,0 +1,34 @@
+
+For older versions of the Arduino SDK (software development kit) some
+of the code we need is already in the supplied arduino libraries in an
+incomplete form.  So, we need to modify it.  This code here works for
+arduino-1.0.5.
+
+Ignore this directory if using the latest arduino-1.6.6
+
+For arduino-1.0.5, two files found in the arduino-core directory need to be
+substituted into the arduino libraries:
+   
+    USBAPI.h
+    HID.cpp
+
+The versions in arduino-core are based on arduino-1.0.5.  If using
+that version, rename the originals and then make symbolic links (shortcuts) to 
+the files in this directory.
+
+On Fedora linux, I did:
+
+     sudo yum install arduino-1.0.5
+
+     here=`/bin/pwd`
+
+     cd /usr/share/arduino/hardware/arduino/cores/arduino
+     sudo mv USBAPI.h USBAPI.h.orig
+     sudo mv HID.cpp HID.cpp.orig
+
+     ln -s $here/USBAPI.h .
+     ln -s $here/HID.cpp .
+
+     cd $here
+
+Recent Ubuntu also packages arduino-1.0.5, so that ought to be similar.
