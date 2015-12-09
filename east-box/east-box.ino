@@ -20,12 +20,14 @@ void setup() {
 }
 
 static   uint16_t prev_btns;
+static   uint16_t prev_ana0;
 
 void loop() {
 	uint16_t btns;
-  
-	btns = 0;
+	uint16_t ana0;
 
+        ana0 = analogRead(0);
+	btns = 0;
 	if(digitalRead(0)  == 0) btns |= 1<<0;
 	if(digitalRead(1)  == 0) btns |= 1<<1;
 	if(digitalRead(2)  == 0) btns |= 1<<2;
@@ -40,11 +42,14 @@ void loop() {
 	if(digitalRead(11) == 0) btns |= 1<<11;
 	if(digitalRead(12) == 0) btns |= 1<<12;
 
-	btns |= 0x8000;  // test hack: last buttons always pressed.
+	// test hack: last few buttons always pressed.
+	btns |= 1<<14;
+	btns |= 1<<15;
 
-	if(btns != prev_btns) {
-		Gamepad.move(btns);
+	if(btns != prev_btns || ana0 != prev_ana0) {
+		Gamepad.move(btns, ana0>>2);
 	}
 
 	prev_btns = btns;
+        prev_ana0 = ana0;
 }

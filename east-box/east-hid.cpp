@@ -27,6 +27,15 @@ static const u8 _hidReportDescriptor[] PROGMEM = {
     0x81, 0x02,                    //     INPUT (Data,Var,Abs)
 
     0xc0,                          //   END_COLLECTION
+
+    // 8 bit throttle
+    0x05, 0x02,                    //   USAGE_PAGE (Simulation Controls)
+    0x09, 0xbb,                    //   USAGE (Throttle)
+    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+    0x26, 0xff, 0x00,              //   LOGICAL_MAXIMUM (255)
+    0x75, 0x08,                    //   REPORT_SIZE (8)
+    0x95, 0x01,                    //   REPORT_COUNT (1)
+    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
     0xc0                           // END_COLLECTION
 };
 
@@ -49,14 +58,14 @@ void Gamepad_::end(void)
 {
 }
 
-void Gamepad_::move(uint16_t bs)
+void Gamepad_::move(uint16_t bs, uint8_t throttle)
 {
 	report.buttons[0] = bs & 0xff;
 	report.buttons[1] = bs >> 8;
-	HID().SendReport(3, &report, 2);
+	report.throttle = throttle;
+	HID().SendReport(3, &report, 3);
 }
 
-
-Gamepad_ Gamepad;  // single object instance.
+Gamepad_ Gamepad;  // singleton object instance.
 
 #endif

@@ -1,7 +1,10 @@
 #
 # per-project makefile for use with the Arduino-Makefile package
-# from https://github.com/sudar/Arduino-Makefile
-#
+# based on https://github.com/sudar/Arduino-Makefile
+
+# settings here might need to be changed.
+
+# Where you've put the Arduino-Makefile package
 ARDMK_DIR=../../Arduino-Makefile
 
 # Choose your arduino board type here.
@@ -10,10 +13,14 @@ BOARD_TAG    = micro
 
 #ARDUINO_LIBS = 
 
-# set these to use arduino packages installed using your native 
+# uncomment these to use the arduino packages installed using your native 
 # linux package manager. 
 #AVR_TOOLS_DIR=/usr
 #ARDUINO_DIR   = /usr/share/arduino
+
+# this is where I put the contents of arduino-1.6.6-linux32.tar.xz
+# or arduino-1.6.6-linux64.tar.xz
+# change it if you've put it somewhere else.
 ARDUINO_DIR   = /opt/arduino-1.6.6
 
 AVRDUDE_OPTS = -v -v
