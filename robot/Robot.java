@@ -15,14 +15,11 @@ public class Robot extends IterativeRobot {
     JoystickButton button12 = new JoystickButton(arduino, 12);
     JoystickButton button13 = new JoystickButton(arduino, 13);
     
-
     Servo servo = new Servo(0);
     Servo servoPot = new Servo(1);
     double servoPosition = 0;
     double potentiometer;
-    
-    
-  
+
     public void teleopPeriodic() {
         SmartDashboard.putBoolean("Button 9", button9.get());
         SmartDashboard.putBoolean("Button 11", button11.get());
@@ -30,8 +27,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Button 13", button13.get());
         
         //Potentiometer reads between -1 and 1, map to 0 and 1 for servo
-        potentiometer = (arduino.getRawAxis(0) + 1.0) / 2.0;
-        
+        potentiometer = (arduino.getRawAxis(0) + 1.0) / 2.0;       
         SmartDashboard.putNumber("Potentiometer", potentiometer);
         
         if(button9.get()) {
@@ -53,6 +49,5 @@ public class Robot extends IterativeRobot {
         servo.set(servoPosition);
         servoPot.set(potentiometer);
     }
-
 }
 
