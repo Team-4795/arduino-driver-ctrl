@@ -1,0 +1,27 @@
+
+
+some stuff from http://www.imaginaryindustries.com/blog/?p=80
+http://www.imaginaryindustries.com/arduino/leoJoy/USBAPI.h etc
+
+links
+	http://forum.freetronics.com/viewtopic.php?t=734
+	comments include a complete 32-button "joystick" done with a 4x8 
+	diode matrix
+	experimentally found he needs an analog axis for it to work sometimes
+	has code we can study to expand.
+
+http://www.imaginaryindustries.com/blog/helmpcb.com/electronics/usb-joystick
+http://www.freebsddiary.org/APC/usb_hid_usages.php
+http://www.usb.org/developers/hidpage#HID%20Descriptor%20Tool
+
+
+http://hamaluik.com/posts/making-a-custom-teensy3-hid-joystick/
+HID example with 4 axes, 16 buttons.
+	8 bits per axis.
+
+https://forum.pjrc.com/threads/23681-Many-axis-joystick
+http://hunt.net.nz/users/darran/weblog/15f92/
+	HID example with 8 axes, 16 bits each.  plus 40 buttons
+	and many other HID descriptor examples in the comments.
+
+
